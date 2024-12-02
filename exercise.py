@@ -14,20 +14,17 @@ def check_letter():
     
     alphabet_letter = input('Enter a single letter "a-z" or "A-Z": ').lower()
 
-    if alphabet_letter.isalpha() == False:
-        print(f"Invalid input. Please, enter a letter in the alphabet.")
-        return
-
     VOWELS = ["a", "e", "i", "o", "u"]
 
-    if alphabet_letter in VOWELS:
+    if alphabet_letter.isalpha() == False:
+        print(f"Invalid input. Please, enter a letter in the alphabet.")
+
+    elif alphabet_letter in VOWELS:
         print(f"The letter {alphabet_letter} is a vowel")
     
     else:
         print(f"The letter {alphabet_letter} is a consonant.")
 
-# I though of using data typing but that doesn't make any sense.
-# I learned about isalpha()
 check_letter()
 
 #/ ------------------------------- /#
@@ -56,34 +53,61 @@ def check_voting_eligibility():
 check_voting_eligibility()
 #/ ------------------------------- /#
 # Exercise 3: Calculate Dog Years
-#
-# Write a Python function named `calculate_dog_years` that calculates a dog's age in dog years.
-# Fill in the logic to perform the calculation inside the function.
-#
-# Function Details:
-# - Prompt the user to enter a dog's age: "Input a dog's age: "
-# - Calculate the dog's age in dog years:
-#      - The first two years of the dog's life count as 10 dog years each.
-#      - Each subsequent year counts as 7 dog years.
-# - Print the calculated age: "The dog's age in dog years is xx."
-# - Replace 'xx' with the calculated dog years.
-#
-# Hints:
-# - Use the `input()` function to capture user input.
-# - Convert the string input to an integer using `int()`.
-# - Apply conditional logic to perform the correct age calculation based on the dog's age.
 
 def calculate_dog_years():
-    DOG_YEARS = 7
-    PUPPY_YEARS = 2
-
     dog_age = input("Input a dog's age in human years: ")
 
     if dog_age.isalpha() == True:
         print(f"Please, enter a number.")
+
+    elif int(dog_age) <= 2:
+        converted_age = int(dog_age) * 10
+        print(f"The dog's age in dog years is {str(converted_age)}.")
+
     else:
-        if dog_age > PUPPY_YEARS:
-            converted_age = int(dog_age) * DOG_YEARS
-            print(f"The dog's age in dog years is {str(converted_age)}.")
+        converted_age = 20 + (int(dog_age) - 2) * 7
+        print(f"The dog's age in dog years is {str(converted_age)}.")
 
 calculate_dog_years()
+
+#/ ------------------------------- /#
+# Exercise 4: Weather Advice
+
+def weather_advice():
+    is_it_cold = input('Is it cold? (yes/no). ').lower()
+    is_it_raining = input('is it raining? (yes/no). ').lower()
+    
+    if is_it_cold == "yes" and is_it_raining == "yes":
+        print("Wear a waterproof coat.")
+    elif is_it_cold == "yes" and is_it_raining == "no":
+        print("Wear a warn coat.")
+    elif is_it_cold == "no" and is_it_raining == "yes":
+        print("Carry an umbrella.")
+    elif is_it_cold == "no" and is_it_raining == "no":
+        print("Wear light clothing.")
+
+weather_advice()
+
+#/ ------------------------------- /#
+# Exercise 5: What's the Season?
+
+def determine_season():
+    month = input("Enter the month of the year (Jan - Dec): ").lower()
+    day = input("Enter the day of the month: ")
+    day = int(day)
+
+    if month in ["dec", "jan", "feb"] or (month == "mar" and day <= 19) or (month == "dec" and day >= 21):
+        season = "Winter"
+    elif month in ["apr", "may"] or (month == "mar" and day >= 20) or (month == "jun" and day <= 20):
+        season = "Spring"
+    elif month in ["jul", "aug"] or (month == "jun" and day >= 21) or (month == "sep" and day <= 21):
+        season = "Summer"
+    elif month in ["oct", "nov"] or (month == "sep" and day >= 22) or (month == "dec" and day <= 20):
+        season = "Fall"
+    else:
+        print("Invalid date. Please check your input.")
+        return
+
+    print(f"{month} {day} is in {season}.")
+
+determine_season()
